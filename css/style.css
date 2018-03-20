@@ -10,6 +10,7 @@
 	.grid-item {
 		margin-bottom: 4vw;
 		width: 44vw;
+		background-image: url('./../loader.gif');
 	}
 	.gutter-sizer {
 		width: 4vw;

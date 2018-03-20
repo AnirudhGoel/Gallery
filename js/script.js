@@ -15,18 +15,17 @@ $.getJSON('fileList.json', function(data) {
 
 		console.log(actualWidth, actualHeight, displayWidth, displayHeight);
 
-		htmlText += '<div class="grid-item" style="min-height: ' + displayHeight + ';"><img class="lazy" data-src="img/' + data['files'][i]['file_name'] + '" /></div>';
+		htmlText = '<div class="grid-item" style="min-height: ' + displayHeight + ';"><img class="lazy" data-src="img/' + data['files'][i]['file_name'] + '" /></div>';
+
+		$(".grid").append(htmlText);
 	}
-
-	$(".grid").append(htmlText);
-
 
 
 	var $grid = $('.grid').masonry({
 		itemSelector: '.grid-item',
 		gutter: '.gutter-sizer',
-		stagger: 30,
-		horizontalOrder: true
+		stagger: 30
+		// horizontalOrder: true
 	});
 
 	$grid.on( 'click', '.grid-item', function() {

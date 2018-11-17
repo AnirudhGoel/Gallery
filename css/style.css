@@ -1,16 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Qwigley');
+
 @media only screen and (min-width : 320px) {
 	img {
 		border-radius: 7px;
 		max-width: 100%;
 	}
 	.grid {
-		margin-top: 10vh;
+		margin-top: 3vh;
 		margin-left: 4vw;
 	}
 	.grid-item {
 		margin-bottom: 4vw;
 		width: 44vw;
 		background-color: rgb(193,212,251);
+		border-radius: 7px;
 	}
 	.gutter-sizer {
 		width: 4vw;
@@ -19,14 +22,15 @@
 		width: 80vw !important;
 	}
 	#top-banner {
-		font-family: 'Josefin Sans', sans-serif;
+		font-family: 'Qwigley', cursive;
 		font-weight: 300;
 		text-align: center;
-		font-size: 2.5em;
+		font-size: 4.5em;
 		padding-top: 20px;
-		padding-bottom: 20px;
-		background-color: #FF4343;
-		color: white;
+		padding-bottom: 0px;
+		border-bottom: 0px;
+		/*background-color: #FF4343;*/
+		color: #FF4343;
 	}
 }
 
@@ -51,8 +55,9 @@
 	}
 	#top-banner {
 		font-weight: 400;
-		font-size: 3.5em;
+		font-size: 10em;
 		padding-top: 25px;
+		padding-bottom: 0px;
 	}
 }
 

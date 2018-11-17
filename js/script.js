@@ -1,6 +1,6 @@
 var htmlText = "";
 var paginationCount = 0;
-var xyz = new Array();
+var shuffledImages = new Array();
 
 var $grid = $('.grid').masonry({
 	itemSelector: '.grid-item',
@@ -22,7 +22,7 @@ $(document).ready(function() {
 			}
 		},
 		success: function(data) {
-			xyz = shuffle(data['files']);
+			shuffledImages = shuffle(data['files']);
 
 			getMoreImages(paginationCount, 20);
 			paginationCount += 2;
@@ -37,14 +37,6 @@ $(document).ready(function() {
 
 				$grid.masonry();
 			});
-
-			$('.lazy').Lazy({
-		        scrollDirection: 'vertical',
-		        effect: 'fadeIn',
-		        afterLoad: function() {
-		        	$grid.masonry();
-		        }
-		    });
 		},
 		error: function(error) { console.log(error); }
 	});
@@ -56,10 +48,10 @@ function getMoreImages(paginationCount, quantity) {
 	offset = 10 * paginationCount;
 
 	for (var i = offset; i < offset + quantity; i++) {
-		// console.log(xyz[i]['file_name']);
+		// console.log(shuffledImages[i]['file_name']);
 
-		var actualWidth = xyz[i]['width'];
-		var actualHeight = xyz[i]['height'];
+		var actualWidth = shuffledImages[i]['width'];
+		var actualHeight = shuffledImages[i]['height'];
 		var displayWidth = $('.grid-item').width();
 		var displayHeight = Math.abs(1 - (actualWidth - displayWidth) / actualWidth) * actualHeight;
 
@@ -67,11 +59,20 @@ function getMoreImages(paginationCount, quantity) {
 
 		// console.log(actualWidth, actualHeight, displayWidth, displayHeight);
 
-		htmlText += '<div class="grid-item" style="min-height: ' + displayHeight + ';"><img class="lazy" data-src="img/' + xyz[i]['file_name'] + '" /></div>';
+		htmlText += '<div class="grid-item" style="min-height: ' + displayHeight + ';"><img class="lazy" data-src="img/' + shuffledImages[i]['file_name'] + '" /></div>';
 	}
 
-	$(".grid").append(htmlText);
-	$grid.masonry();
+	var $newImages = $(htmlText);
+
+	$grid.append($newImages).masonry('appended', $newImages);
+
+	$('.lazy').Lazy({
+        scrollDirection: 'vertical',
+        effect: 'fadeIn',
+        afterLoad: function() {
+        	$grid.masonry();
+        }
+    });
 }
 
 $(window).scroll(function() {
@@ -80,6 +81,7 @@ $(window).scroll(function() {
    	if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
 		getMoreImages(paginationCount, 10);
         paginationCount += 1;
+		$grid.masonry();
    	}
 });
 
